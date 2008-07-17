@@ -1,0 +1,26 @@
+<%= link_to 'Edit', :action => 'edit', :id => @model %> |
+<%= link_to 'Back', :action => 'list' %>
+
+<% for column in Model.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @model.send(column.name) %>
+</p>
+<% end %>
+<p>
+  <b>Table Count:</b> <%=h Table.count(:conditions => ['models_id = ?', @model.id]) %>
+</p>
+
+<table>
+<% for table in Table.find(:all, :conditions => ['models_id = ?', @model.id], :order => 'name') %>
+ <tr <%= alternate_class %>>
+    <td><%= link_to table.name,:controller => 'tables', :action => 'show', :id => table %></td>
+    <td><%=h table.description %></td>
+    <td><%=h table.table_type %></td>
+    <td><%= Model.find(table.models_id).name %></td>
+    <td><%= link_to 'Show',:controller => 'tables', :action => 'show', :id => table %></td>
+  </tr>
+
+<% end %></table>
+	  
+<%= link_to 'Edit', :action => 'edit', :id => @model %> |
+<%= link_to 'Back', :action => 'list' %>

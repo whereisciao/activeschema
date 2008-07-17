@@ -1,0 +1,22 @@
+<div class='columns' id='columns'>
+     <table>
+       <tr>
+       	<th>Columns:</th>
+       	<th width='100'>Type:</th>
+       	<th>NULL:</th>
+       	<th>CodeSet:</th>
+       	<th>Definition:</th>
+       </tr>
+     <% for col in @columns %>
+       <tr <%= alternate_class %>>
+         <td><%= link_to col.name,:controller => 'columns', :action => 'show', :id => col %></td>
+         <td><%=h col.column_type %></td>
+         <td><%=h col.null_ind %></td>
+         <td><%= if( col.code_value > 0)
+         		 	col.code_value 
+         		  end %></td>
+         <td><%=h col.description %></td>
+       </tr>
+     <% end %>
+     </table>
+</div>

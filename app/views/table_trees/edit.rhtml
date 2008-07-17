@@ -1,0 +1,9 @@
+<h1>Editing table_trees</h1>
+
+<% form_tag :action => 'update', :id => @table_trees do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @table_trees %> |
+<%= link_to 'Back', :action => 'list' %>

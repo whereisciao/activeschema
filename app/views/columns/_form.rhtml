@@ -1,0 +1,19 @@
+<%= error_messages_for 'column' %>
+
+<!--[form:column]-->
+<p><label for="column_name">Name</label><br/>
+<%= text_field 'column', 'name'  %></p>
+
+<p><label for="column_column_type">Column type</label><br/>
+<%= text_field 'column', 'column_type'  %></p>
+
+<p><label for="column_null_ind">Null ind</label><br/>
+<select id="column_null_ind" name="column[null_ind]"><option value="false">False</option><option value="true">True</option></select></p>
+
+<p><label for="column_code_value">Code value</label><br/>
+<%= text_field 'column', 'code_value'  %></p>
+
+<p><label for="column_description">Description</label><br/>
+<%= text_area 'column', 'description'  %></p>
+<!--[eoform:column]-->
+

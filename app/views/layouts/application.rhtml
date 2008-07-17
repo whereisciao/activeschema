@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>activeSchema: <%= controller.controller_name %>-<%= controller.action_name %></title>
+  <%= stylesheet_link_tag 'scaffold' %>
+  <%= javascript_include_tag :defaults %>
+</head>
+<body>
+
+<% form_tag :controller => 'tables', :action => 'search' do %>
+<p>Search for table: <%= text_field_with_auto_complete :table, :name %><%= submit_tag 'Search' %></p>
+<% end %>
+<p style="color: green"><%= flash[:notice] %></p>
+<div class='alpha_search'>
+     <ul>
+     	<li><%= link_to "Data Models", :controller => "models", :action => "list" %></li>
+          <% for letter in "A".."Z" %>
+               <li><%= link_to letter, :controller => "tables", :action => "list", :letter => letter %></li>
+          <% end %>
+
+
+     </ul>
+</div>
+<div class='content'>
+<%= yield  %>
+</div>
+<br clear='left'/>
+<hr/>
+</body>
+</html>

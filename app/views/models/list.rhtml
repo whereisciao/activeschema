@@ -1,0 +1,31 @@
+<h1>Listing Data Models</h1>
+<%= link_to 'Previous page', { :page => @model_pages.current.previous } if @model_pages.current.previous %>
+<%= link_to 'Next page', { :page => @model_pages.current.next } if @model_pages.current.next %> 
+
+<div class='column'>
+<ul>
+<% @models.each_with_index do |model, index| %>       
+     <%  if( index % @column_size == 0 && index != 0) %>
+          </ul>
+          </div>
+          <div class='column'>
+          <ul>
+     <%  end %>
+       
+       <li>
+         <%= link_to "#{model.name} ( #{Table.count(:conditions => ['models_id = ?', model.id])} Tables )", :action => 'show', :id => model %>
+         
+           
+       </li>
+       
+  
+<% end %>
+
+<%  if( @models.size % @column_size != 1) %>
+     </ul>
+     </div>
+<%  end %>
+
+<%= link_to 'Previous page', { :page => @model_pages.current.previous } if @model_pages.current.previous %>
+<%= link_to 'Next page', { :page => @model_pages.current.next } if @model_pages.current.next %> 
+

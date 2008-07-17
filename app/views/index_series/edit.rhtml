@@ -1,0 +1,9 @@
+<h1>Editing index_series</h1>
+
+<% form_tag :action => 'update', :id => @index_series do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @index_series %> |
+<%= link_to 'Back', :action => 'list' %>

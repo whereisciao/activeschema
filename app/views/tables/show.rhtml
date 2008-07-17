@@ -1,0 +1,89 @@
+<%= link_to 'Edit', :action => 'edit', :id => @table %> |
+<%= link_to 'Back', :action => 'list' %>
+<p>
+<% for column in Table.content_columns %>
+
+  <b><%= column.human_name %>:</b> 
+     <%=h @table.send(column.name) %>
+  <br />
+  
+
+<% end %>
+  <b>Data Model:</b> <%= Model.find(@table.models_id).name %><br />
+  <b>Children Tables:</b>
+
+  <div class='children'>
+  <div class='column'>
+  <ul>
+  <% @children.each_with_index do |child, index| %>
+      <%  if( index % @child_col_size == 0 && index != 0) %>
+          </ul>
+          </div>
+          <div class='column'>
+          <ul>
+     <%   end %>
+     <li><% if( child.tables_id != -1) %>
+          <%= link_to child.table_name,:controller => 'tables', :action => 'show', :id => child.table_name, :type => 'NAME' %>
+         <% else %>
+              <%= child.table_name %>
+         <% end %>
+         </li>
+  <% end %>
+     <%  if( @children.size % @child_col_size != 1) %>
+          </ul>
+          </div>
+     <%  end %>
+  </div>
+
+  <br clear='left'/>
+  <div class = 'parent'>
+  <b>Parent Tables:</b>
+  <div class='column'>
+  <ul>
+  <% @parents.each_with_index do |parent, index| %>
+     <%  if( index % @parent_col_size == 0 && index != 0) %>
+          </ul>
+          </div>
+          <div class='column'>
+          <ul>
+     <%   end %>
+     <li><% if( parent.tables_id != -1) %>
+          <%= link_to parent.table_name,:controller => 'tables', :action => 'show', :id => parent.table_name, :type => 'NAME' %>
+         <% else %>
+          <%= parent.table_name %>
+         <% end %>
+     </li>
+
+  <% end %>
+    <%  if( @parents.size % @parent_col_size != 1) %>
+          </ul>
+          </div>
+     <%  end %>
+  </div>
+  <br clear='left'/>
+  <b>Indexes:</b>
+  <ol>
+     <li>
+  <% @table_indexes.each_with_index do |table_index, index|  %>
+     <% if index != 0 and table_index.seq == 1 %>
+     </li><li>
+     <% end %>
+     <%= table_index.column_name %>&nbsp; &nbsp;
+  <% end %>
+  </ol>
+
+
+</p>
+<div id='col_controls'>
+<p> sort columns
+     <ul>
+          <li><%= link_to_remote("Col. Order", :update => 'columns', :url => {:controller => 'columns', :action => 'sort' , :id => @columns[1].tables_id, :type => 0}) %></li>
+          <li><%= link_to_remote("Alpha Order", :update => 'columns', :url => {:controller => 'columns', :action => 'sort' , :id => @columns[1].tables_id, :type => 1}) %></li>
+          <li><%= link_to_remote("Reverse Alpha Order", :update => 'columns', :url => {:controller => 'columns', :action => 'sort' , :id => @columns[1].tables_id, :type => 2}) %></li>
+          <li><%= link_to_remote("Code Set Order", :update => 'columns', :url => {:controller => 'columns', :action => 'sort' , :id => @columns[1].tables_id, :type => 3}) %></li>
+     </ul>
+</p></div>
+<%= render(:partial => "/columns/show_col") %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @table %> |
+<%= link_to 'Back', :action => 'list' %>

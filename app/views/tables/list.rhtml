@@ -1,0 +1,25 @@
+<h1>Listing tables</h1>
+
+<table>
+  <tr>
+  <% for column in Table.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+    <th>Data Model</th
+  </tr>
+  
+<% for table in @tables %>
+  <tr  <%= alternate_class %>>
+    <td><%= link_to table.name,:controller => 'tables', :action => 'show', :id => table %></td>
+    <td><%=h table.description %></td>
+    <td><%=h table.table_type %></td>
+    <td><%= link_to Model.find(table.models_id).name, :controller => 'models', :action => 'show', :id => table.models_id %></td>
+    <td><%= link_to 'Show',:controller => 'tables', :action => 'show', :id => table %></td>
+  </tr>
+<% end %>
+</table>
+
+<% if(@table_pages != nil) %>
+     <%= link_to 'Previous page', { :page => @table_pages.current.previous } if @table_pages.current.previous %>
+     <%= link_to 'Next page', { :page => @table_pages.current.next } if @table_pages.current.next %> 
+<% end %>
